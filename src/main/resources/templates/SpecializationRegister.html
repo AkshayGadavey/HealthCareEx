@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <title>SpecializationRegister</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header bg-primary ">
+                <h3 class="text-center text-white">Specialization Register</h3>
+            </div> <!--div-header-->
+            <div class="card-body ">
+                <form method="POST" action="/save" id="saveSpecForm">
+                    <!-- row1 -->
+                    <div class="row">
+                        <div class=col-2>
+                            <label for="id">ID</label>
+                        </div>
+                        <div class=col-4>
+                            <input type="number" name="id" id="id" class="form-control">
+                        </div>
+                        <div class=col-6><span id="specIdError"></span></div>
+                    </div><!-- row1- end -->
+
+                    <!-- row2 -->
+                    <div class="row">
+                        <div class=col-2>
+                            <label for="specCode">Specialization Code</label>
+                        </div>
+                        <div class=col-4>
+                            <input type="text" name="specCode" id="specCode" class="form-control">
+                        </div>
+                        <div class=col-6><span id="specCodeError"></span></div>
+                    </div><!-- row2- end -->
+
+                    <!-- row3 -->
+                    <div class="row">
+                        <div class=col-2>
+                            <label for="specName">Specialization Name</label>
+                        </div>
+                        <div class=col-4>
+                            <input type="text" name="specName" id="specName" class="form-control">
+                        </div>
+                        <div class=col-6><span id="specNameError"></span></div>
+                    </div><!-- row3 -->
+
+                    <!-- row4 -->
+                    <div class="row">
+                        <div class=col-2>
+                            <label for="specNote">Specialization Note</label>
+                        </div>
+                        <div class=col-4>
+                            <input type="text" name="specNote" id="specNote" class="form-control">
+                        </div>
+                        <div class=col-6><span id="specNoteError"></span></div>
+                    </div><!-- row4- end -->
+                    <div><button type="submit" class="btn btn-success">Register<i
+                                class="fa-solid fa-file-plus"></i></button></div>
+
+                </form>
+            </div> <!--div-body-->
+            <div class="card-footer text-muted">
+                <span>message</span>
+            </div> <!-- //<div-footer> -->
+        </div><!--div-card-->
+    </div><!--div-container-->
+
+    <!--Scripts  -->
+    <script>
+        $(document).ready(function () {
+
+            //1. hide error section
+            $("#specIdError").hide();
+            $("#specCodeError").hide();
+            $("#specNameError").hide();
+            $("#specNoteError").hide();
+
+            //2. define error variable
+            var specIdError = false;
+            var specCodeError = false;
+            var specNameError = false;
+            var specNoteError = false;
+
+            //3. validate function
+            function validate_specId() {
+                return specCodeError;
+            }
+
+            function validate_specCode() {
+                var val = $("#specCode").val();
+                if (val == '') {
+                    $("#specCodeError").show();
+                    specCodeError = false;
+                    $("#specCodeError").html("*Insert <b>Code</b>")
+                } else {
+                    $("#specCodeError").hide();
+                    specCodeError = true;
+                }
+                return specCodeError;
+            }
+
+            function validate_specName() {
+                var val = $("#specName").val();
+                if (val == '') {
+                    $("#specNameError").show();
+                    specNameError = false;
+                    $("#specNameError").html("*Insert <b>Name</b>")
+                } else {
+                    $("#specNameError").hide();
+                    specNameError = true;
+                }
+            }
+
+            function validate_specNote() {
+                var val = $("#specNote").val;
+                if (val == '') {
+                    $("#specNoteError").show();
+                    specNoteError = false;
+                    $("#specNameError").html("*Insert <b>Note</b>")
+                } else {
+                    $("#specNoteError").hide();
+                    specNoteError = true;
+                }
+            }
+
+            //4. action-event
+            // $("#id").keyup(function () {
+
+            // }); //id
+
+            $("#specCode").keyup(function () {
+                validate_specCode();
+            }); //specCode
+
+            $("#specName").keyup(function () {
+
+            });//specName
+
+            $("#specNote").keyup(function () {
+
+            });//specNote
+
+            //5. on submit
+            $("#saveSpecForm").submit(function () {
+                if (specCodeError && specNameError && specNoteError) {
+                    submit()
+                } else {
+                    
+                }
+                validate_specCode();
+            }); // on submit
+
+        });// document-script
+
+    </script>
+</body>
+
+</html>
